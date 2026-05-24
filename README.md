@@ -1,7 +1,7 @@
 # ध्यान · Dhyan
 ### A Calm Focus Timer for Any Activity Requiring Concentration, Incorporating Traditional Nepali Themes
 
-### Check it now at https://ashleshbasnet.github.io/Dhyan/
+#### Check it out in https://ashleshbasnet.github.io/Dhyan
 
 > *"मन शान्त भए संसार शान्त।" — When the mind is calm, the world is calm.*
 
@@ -31,16 +31,17 @@ The background is not a static image — it is **procedurally generated SVG** co
 
 All prayer flags are also generated programmatically: the `flags()` utility interpolates positions along a line and stamps coloured SVG polygons at each point. Stars in the night scene are placed using a deterministic golden-ratio scatter to avoid clustering. Scene transitions use a 3-second CSS opacity crossfade.
 
-The CrossFades and the time changes have not been tested by me personally, as they change with the local time and changing time locally on my machine will induce a bios time change as I had experienced before.
-
 I would not suggest people try to change the SVG if they aren't skilled with it, I found it a very hard time trying to debug problems there, and it was a template literal too. 0/10 would not reccomend under a time constraint. 
 
 ### Synthesised Audio
-There are no audio files. The **singing bowl sound** on session completion is synthesised entirely via the Web Audio API:
-- Five sine-wave oscillators model the fundamental (396 Hz) and four harmonics, this is the singing bowl.
-- Each partial has its own gain envelope and a slight exponential frequency drop to simulate resonance decay
-- A short sawtooth transient adds the physical "strike" impact
-- Audio context is initialised only on first user interaction (browser autoplay policy compliance)
+*This is where my musical background comes into play :)*
+
+There are no audio files. The **singing bowl sound** on session completion is synthesised entirely via the Web Audio API using Physical Modeling Synthesis:
+- Inharmonic Partial Stack: Instead of standard harmonics, the bowl is modeled using five detuned partials (utilizing a mix of Sine, Triangle, and Sawtooth oscillators). This creates the natural "beating" and shimmer of real bronze.
+- Dynamic Bronze Filtering: A master BiquadFilter ("The Bronze Filter") dynamically shapes the frequency response, softening digital artifacts to replicate the warmth of metal.
+- Convolution Reverb: The sound is processed through a custom ConvolverNode, simulating the acoustics of a massive hall for a lush, organic decay.
+- Physical Strike Transient: A short, high-frequency sawtooth transient simulates the precise moment of a mallet strike.
+*Audio context is initialised only on first user interaction to comply with browser autoplay policies.*
 NOTE: Audio synthesis is something I've been trying to dive into for a long time so I reccomend anyone to watch the Sebastian Lague Audio Series to delve deep into audio synthesis. Furthermore, audio synthesis is much simpler in python (in my opinion) and extraordinarily simple when you pair it with a game engine such as unity.
 
 
@@ -79,7 +80,7 @@ For anyone wanting to add in more quotes or change the quotes, the quotes are in
 
 The visual identity draws from Nepali craft and cultural motifs:
 
-- **Dhaka textile** — CSS border bands along all four edges mimic the geometric woven patterns of Dhaka fabric, using the traditional colour palette of maroon (`#7C1D1D`), gold (`#C99A14`), green (`#1E6440`), and blue (`#1E3A8A`)
+- **Procedural Prayer Flags** — A split-horizon string of CSS-generated prayer flags frames the top of the viewport. The flags feature uneven clip-path cuts for realistic cloth physics, custom 3D flutter animations, and the Om Mani Padme Hum mantra digitally "stamped" onto the fabric.
 - **Typography** — Tiro Devanagari Hindi for Devanagari script, Cormorant Garamond for English body text, and Mukta for UI labels
 - **Glassmorphism panel** — The timer UI floats on a semi-transparent dark glass card (`rgba(10, 8, 20, 0.38)`) with a gold-tinted border
 - **Colour tokens** defined as CSS custom properties on `:root` keep the palette consistent across all components
