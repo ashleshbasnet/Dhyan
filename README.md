@@ -1,6 +1,8 @@
 # ध्यान · Dhyan
 ### A Calm Focus Timer for Study
 
+### Check it now at https://ashleshbasnet.github.io/Dhyan/
+
 > *"मन शान्त भए संसार शान्त।" — When the mind is calm, the world is calm.*
 
 Dhyan is a Pomodoro-style study timer with a Nepali cultural aesthetic, built with vanilla HTML, CSS, and JavaScript. The interface blends Devanagari typography, Dhaka textile motifs, and generative SVG backgrounds that shift with the time of day. This was created for the RBS WebHack Hackathon. 
