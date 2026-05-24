@@ -92,7 +92,7 @@ The visual identity draws from Nepali craft and cultural motifs:
 For running this project, you only need to open the index.html file. I was suggested a lot of things such as NPM and stuff but I centered this project around plain html src. 
 
 As for use:
-Click the play button and thats it! Everything happens automatically. Follow the keybind and instruction!
+Click the play button and thats it! Everything happens automatically. Sound plays when you finish a session!
 
 ---
 
