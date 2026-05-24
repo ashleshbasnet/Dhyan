@@ -1,528 +1,587 @@
 
-    /* ============================================================
-       DHYAN — Root Variables & Reset
-    ============================================================ */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    :root {
-      --maroon:        #7C1D1D;
-      --maroon-deep:   #5A1010;
-      --maroon-dim:    rgba(124, 29, 29, 0.18);
-      --gold:          #C99A14;
-      --gold-light:    #E5B830;
-      --gold-dim:      rgba(201, 154, 20, 0.2);
-      --teal:          #7CBEAF;
-      --slate:         #4B5563;
-      --cream:         #FAF3E0;
-      --white-soft:    rgba(255, 255, 255, 0.88);
-      --glass-bg:      rgba(10, 8, 20, 0.38);
-      --glass-border:  rgba(201, 154, 20, 0.22);
-      --dhaka-maroon:  #7C1D1D;
-      --dhaka-gold:    #C99A14;
-      --dhaka-green:   #1E6440;
-      --dhaka-blue:    #1E3A8A;
-    }
+:root {
+  --maroon:        #7C1D1D;
+  --maroon-deep:   #5A1010;
+  --maroon-dim:    rgba(124, 29, 29, 0.18);
+  --gold:          #C99A14;
+  --gold-light:    #E5B830;
+  --gold-dim:      rgba(201, 154, 20, 0.2);
+  --teal:          #7CBEAF;
+  --slate:         #4B5563;
+  --cream:         #FAF3E0;
+  --white-soft:    rgba(255, 255, 255, 0.88);
+  --glass-bg:      rgba(10, 8, 20, 0.38);
+  --glass-border:  rgba(201, 154, 20, 0.22);
+  --dhaka-maroon:  #7C1D1D;
+  --dhaka-gold:    #C99A14;
+  --dhaka-green:   #1E6440;
+  --dhaka-blue:    #1E3A8A;
+}
 
-    html, body {
-      width: 100%; height: 100%;
-      background: #050210;
-      font-family: 'Cormorant Garamond', Georgia, serif;
-    }
+html, body {
+  width: 100%; height: 100%;
+  background: #050210;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+}
 
-    /* ============================================================
-       BACKGROUND ENGINE
-    ============================================================ */
-    #bg-container {
-      position: fixed; inset: 0;
-      z-index: 0;
-      overflow: hidden;
-    }
+/* BG engine */
+#bg-container {
+  position: fixed; inset: 0;
+  z-index: 0;
+  overflow: hidden;
+}
 
-    .bg-scene {
-      position: absolute; inset: 0;
-      opacity: 0;
-      transition: opacity 3s ease;
-    }
+.bg-scene {
+  position: absolute; inset: 0;
+  opacity: 0;
+  transition: opacity 3s ease;
+}
 
-    .bg-scene.active { opacity: 1; }
+.bg-scene.active { opacity: 1; }
 
-    .bg-scene svg {
-      width: 100%; height: 100%;
-      display: block;
-    }
+.bg-scene svg {
+  width: 100%; height: 100%;
+  display: block;
+}
 
-    /* ============================================================
-       DHAKA PATTERN OVERLAYS
-    ============================================================ */
-    /* Subtle all-over grain */
-    #dhaka-grain {
-      position: fixed; inset: 0; z-index: 1;
-      pointer-events: none;
-      background-image:
-        repeating-linear-gradient(45deg,
-          transparent, transparent 10px,
-          rgba(201,154,20,0.03) 10px, rgba(201,154,20,0.03) 11px),
-        repeating-linear-gradient(-45deg,
-          transparent, transparent 10px,
-          rgba(124,29,29,0.03) 10px, rgba(124,29,29,0.03) 11px);
-    }
 
-    /* Top decorative band — Dhaka weave stripe */
-    #band-top, #band-bottom {
-      position: fixed; left: 0; right: 0; z-index: 50;
-      height: 10px;
-      pointer-events: none;
-      background: repeating-linear-gradient(90deg,
-        var(--dhaka-maroon)  0px,  var(--dhaka-maroon)  10px,
-        var(--dhaka-gold)   10px, var(--dhaka-gold)   20px,
-        var(--dhaka-green)  20px, var(--dhaka-green)  30px,
-        var(--dhaka-gold)   30px, var(--dhaka-gold)   40px,
-        var(--dhaka-maroon) 40px, var(--dhaka-maroon) 50px,
-        var(--dhaka-blue)   50px, var(--dhaka-blue)   60px,
-        var(--dhaka-gold)   60px, var(--dhaka-gold)   70px
-      );
-    }
-    #band-top { top: 0; }
-    #band-bottom { bottom: 0; }
+#dhaka-grain {
+  position: fixed; inset: 0; z-index: 1;
+  pointer-events: none;
+  background-image:
+    repeating-linear-gradient(45deg,
+      transparent, transparent 10px,
+      rgba(201,154,20,0.03) 10px, rgba(201,154,20,0.03) 11px),
+    repeating-linear-gradient(-45deg,
+      transparent, transparent 10px,
+      rgba(124,29,29,0.03) 10px, rgba(124,29,29,0.03) 11px);
+}
 
-    /* Left and right thin accent lines */
-    #band-left, #band-right {
-      position: fixed; top: 0; bottom: 0; z-index: 50;
-      width: 4px; pointer-events: none;
-      background: repeating-linear-gradient(180deg,
-        var(--dhaka-maroon)  0px,  var(--dhaka-maroon)  8px,
-        var(--dhaka-gold)    8px, var(--dhaka-gold)   16px,
-        var(--dhaka-green)  16px, var(--dhaka-green)  24px,
-        var(--dhaka-gold)   24px, var(--dhaka-gold)   32px
-      );
-    }
-    #band-left { left: 0; }
-    #band-right { right: 0; }
+/* ============================================================
+   PRAYER FLAGS (new and updated)
+============================================================ */
+.prayer-flags-container {
+  position: fixed;
+  top: 15px;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between; 
+  pointer-events: none;
+  z-index: 100;
+}
 
-    /* ============================================================
-       LAYOUT
-    ============================================================ */
-    #app {
-      position: relative; z-index: 10;
-      width: 100%; min-height: 100%;
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
-      padding: 24px 16px 32px;
-      gap: 0;
-    }
 
-    /* ============================================================
-       HEADER
-    ============================================================ */
-    #header {
-      text-align: center;
-      margin-bottom: 22px;
-      animation: fadeUp 1.1s ease both;
-    }
+.flags {
+  display: flex;
+  gap: 12px; 
+  margin: 0;
+  padding: 0; 
+  list-style: none;
+  position: relative; 
+}
 
-    #title-dev {
-      font-family: 'Tiro Devanagari Hindi', 'Mukta', serif;
-      font-size: clamp(64px, 10vw, 108px);
-      color: var(--cream);
-      line-height: 1;
-      text-shadow:
-        0 2px 24px rgba(0,0,0,0.6),
-        0 0 80px rgba(201,154,20,0.25);
-      letter-spacing: -0.01em;
-    }
 
-    #title-roman {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(11px, 1.6vw, 14px);
-      letter-spacing: 0.55em;
-      color: var(--gold-light);
-      text-transform: uppercase;
-      font-weight: 300;
-      margin-top: 2px;
-    }
+.flags::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -15px;  
+  right: -15px; 
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(201,154,20,0.6) 15%, rgba(201,154,20,0.6) 85%, transparent);
+}
 
-    #title-sub {
-      font-family: 'Mukta', sans-serif;
-      font-size: 12px;
-      letter-spacing: 0.15em;
-      color: rgba(255,255,255,0.35);
-      font-weight: 300;
-      margin-top: 6px;
-    }
 
-    /* ============================================================
-       MODE TABS
-    ============================================================ */
-    #mode-tabs {
-      display: flex;
-      gap: 3px;
-      background: var(--glass-bg);
-      border: 1px solid var(--glass-border);
-      border-radius: 100px;
-      padding: 4px;
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      margin-bottom: 22px;
-      animation: fadeUp 1.1s 0.15s ease both;
-    }
+.left-cluster { margin-left: 4vw; }
+.right-cluster { margin-right: 4vw; }
 
-    .mode-tab {
-      padding: 7px 18px;
-      border-radius: 100px;
-      border: none;
-      background: transparent;
-      cursor: pointer;
-      font-family: 'Mukta', sans-serif;
-      font-size: 12.5px;
-      font-weight: 400;
-      color: rgba(255,255,255,0.5);
-      transition: all 0.25s ease;
-      letter-spacing: 0.04em;
-      white-space: nowrap;
-    }
 
-    .mode-tab:hover { color: rgba(255,255,255,0.85); }
+.flag {
+  width: 22px;  
+  height: 28px; 
+  position: relative;
+  transform-origin: top center;
+  box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.35);
+  clip-path: polygon(0% 0%, 100% 0%, 98% 90%, 50% 98%, 2% 88%);
+  animation: flutter 3.5s ease-in-out infinite alternate;
+}
 
-    .mode-tab.active {
-      background: var(--maroon);
-      color: var(--cream);
-      box-shadow: 0 2px 10px rgba(92,16,16,0.5);
-    }
+.flag span {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Tiro Devanagari Hindi', serif;
+  font-size: 11px;
+  font-weight: bold;
+  color: rgba(15, 10, 5, 0.45); 
+  text-shadow: 0.5px 0.5px 1px rgba(255, 255, 255, 0.15);
+  padding-bottom: 2px;
+  user-select: none;
+}
 
-    /* ============================================================
-       TIMER RING
-    ============================================================ */
-    #timer-wrapper {
-      position: relative;
-      width: 280px; height: 280px;
-      animation: fadeUp 1.1s 0.25s ease both;
-    }
+.flag::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg, 
+    rgba(255,255,255,0.12) 0%, 
+    rgba(255,255,255,0.0) 50%, 
+    rgba(0,0,0,0.16) 100%
+  );
+  pointer-events: none;
+}
 
-    #timer-svg {
-      width: 100%; height: 100%;
-      transform: rotate(-90deg);
-      overflow: visible;
-    }
+/* Color Palettes */
+.blue { background-color: #5B84B1; }   
+.white { background-color: #EAEAEA; }  
+.white span { color: rgba(15, 10, 5, 0.55); } 
+.red { background-color: #C34A41; }    
+.green { background-color: #5D8A66; }  
+.yellow { background-color: #E6B741; } 
 
-    /* Decorative outer ring with lotuses */
-    .ring-decor {
-      fill: none;
-      stroke: rgba(201,154,20,0.12);
-      stroke-width: 1;
-      stroke-dasharray: 4 8;
-    }
+/* Physics */
+@keyframes flutter {
+  0% { transform: rotate(-5deg) skewX(-4deg) scaleX(1); }
+  35% { transform: rotate(1deg) skewX(3deg) scaleX(0.95); }
+  70% { transform: rotate(-2deg) skewX(-2deg) scaleX(1.03); }
+  100% { transform: rotate(4deg) skewX(5deg) scaleX(0.97); }
+}
 
-    .ring-bg {
-      fill: none;
-      stroke: rgba(255,255,255,0.08);
-      stroke-width: 5;
-    }
+.flag:nth-child(1) { animation-duration: 3.2s; animation-delay: -0.2s; }
+.flag:nth-child(2) { animation-duration: 2.7s; animation-delay: -0.9s; }
+.flag:nth-child(3) { animation-duration: 3.5s; animation-delay: -1.4s; }
+.flag:nth-child(4) { animation-duration: 2.9s; animation-delay: -0.5s; }
+.flag:nth-child(5) { animation-duration: 3.3s; animation-delay: -2.1s; }
 
-    .ring-progress {
-      fill: none;
-      stroke: var(--gold-light);
-      stroke-width: 5;
-      stroke-linecap: round;
-      transition: stroke-dashoffset 1.05s linear, stroke 0.5s ease;
-    }
+/* ============================================================
+  LAYOUT
+============================================================ */
+#app {
+  position: relative; z-index: 10;
+  width: 100%; min-height: 100%;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  padding: 24px 16px 32px;
+  gap: 0;
+}
 
-    .ring-progress.running {
-      animation: ringGlow 2.5s ease-in-out infinite;
-    }
+/* ============================================================
+  HEADER
+============================================================ */
+#header {
+  text-align: center;
+  margin-bottom: 22px;
+  animation: fadeUp 1.1s ease both;
+}
 
-    @keyframes ringGlow {
-      0%, 100% { filter: drop-shadow(0 0 5px rgba(229,184,42,0.45)); }
-      50%       { filter: drop-shadow(0 0 18px rgba(229,184,42,0.85)); }
-    }
+#title-dev {
+  font-family: 'Tiro Devanagari Hindi', 'Mukta', serif;
+  font-size: clamp(64px, 10vw, 108px);
+  color: var(--cream);
+  line-height: 1;
+  text-shadow:
+    0 2px 24px rgba(0,0,0,0.6),
+    0 0 80px rgba(201,154,20,0.25);
+  letter-spacing: -0.01em;
+}
 
-    #timer-inner {
-      position: absolute; inset: 0;
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
-      gap: 2px;
-    }
+#title-roman {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(11px, 1.6vw, 14px);
+  letter-spacing: 0.55em;
+  color: var(--gold-light);
+  text-transform: uppercase;
+  font-weight: 300;
+  margin-top: 2px;
+}
 
-    /* Soft dark disc behind time for readability */
-    #timer-disc {
-      position: absolute;
-      width: 200px; height: 200px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(5,2,20,0.55) 60%, transparent 100%);
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-    }
+#title-sub {
+  font-family: 'Mukta', sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.15em;
+  color: rgba(255,255,255,0.35);
+  font-weight: 300;
+  margin-top: 6px;
+}
 
-    #time-display {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 64px;
-      font-weight: 300;
-      color: var(--cream);
-      line-height: 1;
-      letter-spacing: -0.025em;
-      text-shadow: 0 2px 20px rgba(0,0,0,0.5);
-      position: relative; z-index: 1;
-      transition: color 0.5s ease;
-    }
+/* ============================================================
+  MODE TABS
+============================================================ */
+#mode-tabs {
+  display: flex;
+  gap: 3px;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 100px;
+  padding: 4px;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  margin-bottom: 22px;
+  animation: fadeUp 1.1s 0.15s ease both;
+}
 
-    #mode-label {
-      font-family: 'Mukta', sans-serif;
-      font-size: 10.5px;
-      letter-spacing: 0.28em;
-      color: rgba(255,255,255,0.4);
-      text-transform: uppercase;
-      position: relative; z-index: 1;
-    }
+.mode-tab {
+  padding: 7px 18px;
+  border-radius: 100px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-family: 'Mukta', sans-serif;
+  font-size: 12.5px;
+  font-weight: 400;
+  color: rgba(255,255,255,0.5);
+  transition: all 0.25s ease;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
 
-    #mode-label-dev {
-      font-family: 'Tiro Devanagari Hindi', 'Mukta', serif;
-      font-size: 22px;
-      color: rgba(201,154,20,0.55);
-      position: relative; z-index: 1;
-      margin-top: -2px;
-    }
+.mode-tab:hover { color: rgba(255,255,255,0.85); }
 
-    /* ============================================================
-       CONTROLS
-    ============================================================ */
-    #controls {
-      display: flex;
-      align-items: center;
-      gap: 18px;
-      margin-top: 22px;
-      animation: fadeUp 1.1s 0.35s ease both;
-    }
+.mode-tab.active {
+  background: var(--maroon);
+  color: var(--cream);
+  box-shadow: 0 2px 10px rgba(92,16,16,0.5);
+}
 
-    #btn-start {
-      width: 66px; height: 66px;
-      border-radius: 50%;
-      border: 2px solid var(--gold);
-      background: var(--maroon);
-      cursor: pointer;
-      display: flex; align-items: center; justify-content: center;
-      transition: background 0.2s ease, box-shadow 0.25s ease;
-      box-shadow: 0 4px 26px rgba(92,16,16,0.45);
-    }
+/* ============================================================
+  TIMER RING
+============================================================ */
+#timer-wrapper {
+  position: relative;
+  width: 280px; height: 280px;
+  animation: fadeUp 1.1s 0.25s ease both;
+}
 
-    #btn-start:hover {
-      background: #9B2424;
-      box-shadow: 0 4px 32px rgba(92,16,16,0.65), 0 0 0 8px rgba(201,154,20,0.12);
-    }
+#timer-svg {
+  width: 100%; height: 100%;
+  transform: rotate(-90deg);
+  overflow: visible;
+}
 
-    #btn-start.pulsing {
-      animation: btnPulse 2.8s ease-in-out infinite;
-    }
+/* Decorative outer ring with lotuses */
+.ring-decor {
+  fill: none;
+  stroke: rgba(201,154,20,0.12);
+  stroke-width: 1;
+  stroke-dasharray: 4 8;
+}
 
-    @keyframes btnPulse {
-      0%, 100% { box-shadow: 0 4px 26px rgba(92,16,16,0.45), 0 0 0 0 rgba(201,154,20,0.45); }
-      50%       { box-shadow: 0 4px 26px rgba(92,16,16,0.45), 0 0 0 14px rgba(201,154,20,0); }
-    }
+.ring-bg {
+  fill: none;
+  stroke: rgba(255,255,255,0.08);
+  stroke-width: 5;
+}
 
-    #btn-start svg { fill: var(--cream); width: 22px; height: 22px; }
+.ring-progress {
+  fill: none;
+  stroke: var(--gold-light);
+  stroke-width: 5;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 1.05s linear, stroke 0.5s ease;
+}
 
-    .btn-secondary {
-      width: 46px; height: 46px;
-      border-radius: 50%;
-      border: 1px solid rgba(255,255,255,0.18);
-      background: rgba(255,255,255,0.07);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      cursor: pointer;
-      display: flex; align-items: center; justify-content: center;
-      transition: all 0.2s ease;
-      color: rgba(255,255,255,0.55);
-    }
+.ring-progress.running {
+  animation: ringGlow 2.5s ease-in-out infinite;
+}
 
-    .btn-secondary:hover {
-      background: rgba(255,255,255,0.14);
-      color: rgba(255,255,255,0.9);
-      border-color: rgba(255,255,255,0.38);
-    }
+@keyframes ringGlow {
+  0%, 100% { filter: drop-shadow(0 0 5px rgba(229,184,42,0.45)); }
+  50%       { filter: drop-shadow(0 0 18px rgba(229,184,42,0.85)); }
+}
 
-    .btn-secondary svg {
-      width: 17px; height: 17px;
-      stroke: currentColor; fill: none;
-      stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
-    }
+#timer-inner {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 2px;
+}
 
-    /* ============================================================
-       SESSION DOTS
-    ============================================================ */
-    #sessions {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-top: 20px;
-      animation: fadeUp 1.1s 0.45s ease both;
-    }
+/* Soft dark disc behind time for readability */
+#timer-disc {
+  position: absolute;
+  width: 200px; height: 200px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(5,2,20,0.55) 60%, transparent 100%);
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+}
 
-    .session-dot {
-      width: 9px; height: 9px;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.15);
-      border: 1px solid rgba(255,255,255,0.25);
-      transition: all 0.4s ease;
-    }
+#time-display {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 64px;
+  font-weight: 300;
+  color: var(--cream);
+  line-height: 1;
+  letter-spacing: -0.025em;
+  text-shadow: 0 2px 20px rgba(0,0,0,0.5);
+  position: relative; z-index: 1;
+  transition: color 0.5s ease;
+}
 
-    .session-dot.done {
-      background: var(--gold);
-      border-color: var(--gold-light);
-      box-shadow: 0 0 10px rgba(201,154,20,0.65);
-    }
+#mode-label {
+  font-family: 'Mukta', sans-serif;
+  font-size: 10.5px;
+  letter-spacing: 0.28em;
+  color: rgba(255,255,255,0.4);
+  text-transform: uppercase;
+  position: relative; z-index: 1;
+}
 
-    #session-count-label {
-      font-family: 'Mukta', sans-serif;
-      font-size: 11px;
-      letter-spacing: 0.1em;
-      color: rgba(255,255,255,0.3);
-      margin-left: 6px;
-    }
+#mode-label-dev {
+  font-family: 'Tiro Devanagari Hindi', 'Mukta', serif;
+  font-size: 22px;
+  color: rgba(201,154,20,0.55);
+  position: relative; z-index: 1;
+  margin-top: -2px;
+}
 
-    /* ============================================================
-       TASK INPUT
-    ============================================================ */
-    #task-section {
-      margin-top: 20px;
-      animation: fadeUp 1.1s 0.55s ease both;
-    }
+/* ============================================================
+  CONTROLS
+============================================================ */
+#controls {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-top: 22px;
+  animation: fadeUp 1.1s 0.35s ease both;
+}
 
-    #task-input {
-      background: rgba(5, 2, 20, 0.3);
-      border: 1px solid rgba(255,255,255,0.13);
-      border-radius: 100px;
-      padding: 10px 22px;
-      color: var(--cream);
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 16px;
-      font-style: italic;
-      text-align: center;
-      width: 290px;
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      transition: border-color 0.25s, background 0.25s;
-      outline: none;
-    }
+#btn-start {
+  width: 66px; height: 66px;
+  border-radius: 50%;
+  border: 2px solid var(--gold);
+  background: var(--maroon);
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.2s ease, box-shadow 0.25s ease;
+  box-shadow: 0 4px 26px rgba(92,16,16,0.45);
+}
 
-    #task-input::placeholder { color: rgba(255,255,255,0.25); }
+#btn-start:hover {
+  background: #9B2424;
+  box-shadow: 0 4px 32px rgba(92,16,16,0.65), 0 0 0 8px rgba(201,154,20,0.12);
+}
 
-    #task-input:focus {
-      border-color: rgba(201,154,20,0.45);
-      background: rgba(5,2,20,0.45);
-    }
+#btn-start.pulsing {
+  animation: btnPulse 2.8s ease-in-out infinite;
+}
 
-    /* ============================================================
-       QUOTE
-    ============================================================ */
-    #quote-section {
-      margin-top: 22px;
-      text-align: center;
-      max-width: 380px;
-      padding: 0 20px;
-      animation: fadeUp 1.1s 0.65s ease both;
-    }
+@keyframes btnPulse {
+  0%, 100% { box-shadow: 0 4px 26px rgba(92,16,16,0.45), 0 0 0 0 rgba(201,154,20,0.45); }
+  50%       { box-shadow: 0 4px 26px rgba(92,16,16,0.45), 0 0 0 14px rgba(201,154,20,0); }
+}
 
-    #quote-dev {
-      font-family: 'Tiro Devanagari Hindi', 'Mukta', serif;
-      font-size: 17px;
-      color: rgba(255,255,255,0.6);
-      line-height: 1.6;
-    }
+#btn-start svg { fill: var(--cream); width: 22px; height: 22px; }
 
-    #quote-en {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 13px;
-      font-style: italic;
-      color: rgba(255,255,255,0.32);
-      letter-spacing: 0.04em;
-      margin-top: 4px;
-    }
+.btn-secondary {
+  width: 46px; height: 46px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.18);
+  background: rgba(255,255,255,0.07);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.2s ease;
+  color: rgba(255,255,255,0.55);
+}
 
-    /* Quote ornament */
-    #quote-ornament {
-      font-size: 18px;
-      color: rgba(201,154,20,0.4);
-      margin-bottom: 4px;
-      letter-spacing: 0.2em;
-    }
+.btn-secondary:hover {
+  background: rgba(255,255,255,0.14);
+  color: rgba(255,255,255,0.9);
+  border-color: rgba(255,255,255,0.38);
+}
 
-    /* ============================================================
-       NOTIFICATION TOAST
-    ============================================================ */
-    #notification {
-      position: fixed;
-      top: 24px; left: 50%;
-      transform: translateX(-50%) translateY(-80px);
-      background: rgba(10,5,25,0.75);
-      border: 1px solid var(--glass-border);
-      border-radius: 100px;
-      padding: 12px 28px;
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-      color: var(--cream);
-      font-family: 'Mukta', sans-serif;
-      font-size: 14px;
-      letter-spacing: 0.05em;
-      z-index: 200;
-      transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.5s ease;
-      white-space: nowrap;
-      opacity: 0;
-    }
+.btn-secondary svg {
+  width: 17px; height: 17px;
+  stroke: currentColor; fill: none;
+  stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+}
 
-    #notification.show {
-      transform: translateX(-50%) translateY(0);
-      opacity: 1;
-    }
+/* ============================================================
+  SESSION DOTS
+============================================================ */
+#sessions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 20px;
+  animation: fadeUp 1.1s 0.45s ease both;
+}
 
-    /* ============================================================
-       FLASH OVERLAY
-    ============================================================ */
-    #flash {
-      position: fixed; inset: 0; z-index: 100;
-      pointer-events: none;
-      opacity: 0;
-      transition: opacity 0.15s ease;
-    }
+.session-dot {
+  width: 9px; height: 9px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.25);
+  transition: all 0.4s ease;
+}
 
-    #flash.show { opacity: 1; }
+.session-dot.done {
+  background: var(--gold);
+  border-color: var(--gold-light);
+  box-shadow: 0 0 10px rgba(201,154,20,0.65);
+}
 
-    /* ============================================================
-       KEYBOARD SHORTCUT HINT
-    ============================================================ */
-    #kbd-hint {
-      position: fixed; bottom: 22px; left: 50%;
-      transform: translateX(-50%);
-      font-family: 'Mukta', sans-serif;
-      font-size: 11px;
-      letter-spacing: 0.12em;
-      color: rgba(255,255,255,0.2);
-      z-index: 20;
-      pointer-events: none;
-    }
+#session-count-label {
+  font-family: 'Mukta', sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: rgba(255,255,255,0.3);
+  margin-left: 6px;
+}
 
-    /* ============================================================
-       ANIMATIONS
-    ============================================================ */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(18px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
+/* ============================================================
+  TASK INPUT
+============================================================ */
+#task-section {
+  margin-top: 20px;
+  animation: fadeUp 1.1s 0.55s ease both;
+}
 
-    /* ============================================================
-       RESPONSIVE
-    ============================================================ */
-    @media (max-height: 720px) {
-      #title-dev { font-size: 52px; }
-      #timer-wrapper { width: 230px; height: 230px; }
-      #time-display { font-size: 50px; }
-      #timer-disc { width: 165px; height: 165px; }
-      #mode-tabs { margin-bottom: 14px; }
-      #controls { margin-top: 14px; }
-      #sessions { margin-top: 12px; }
-      #task-section { margin-top: 12px; }
-      #quote-section { margin-top: 12px; }
-      #quote-dev { font-size: 14px; }
-    }
+#task-input {
+  background: rgba(5, 2, 20, 0.3);
+  border: 1px solid rgba(255,255,255,0.13);
+  border-radius: 100px;
+  padding: 10px 22px;
+  color: var(--cream);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 16px;
+  font-style: italic;
+  text-align: center;
+  width: 290px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: border-color 0.25s, background 0.25s;
+  outline: none;
+}
 
-    @media (max-width: 420px) {
-      .mode-tab { padding: 7px 12px; font-size: 11.5px; }
-      #task-input { width: 260px; }
-    }
+#task-input::placeholder { color: rgba(255,255,255,0.25); }
+
+#task-input:focus {
+  border-color: rgba(201,154,20,0.45);
+  background: rgba(5,2,20,0.45);
+}
+
+/* ============================================================
+  QUOTE
+============================================================ */
+#quote-section {
+  margin-top: 22px;
+  text-align: center;
+  max-width: 380px;
+  padding: 0 20px;
+  animation: fadeUp 1.1s 0.65s ease both;
+}
+
+#quote-dev {
+  font-family: 'Tiro Devanagari Hindi', 'Mukta', serif;
+  font-size: 17px;
+  color: rgba(255,255,255,0.6);
+  line-height: 1.6;
+}
+
+#quote-en {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 13px;
+  font-style: italic;
+  color: rgba(255,255,255,0.32);
+  letter-spacing: 0.04em;
+  margin-top: 4px;
+}
+
+/* Quote ornament */
+#quote-ornament {
+  font-size: 18px;
+  color: rgba(201,154,20,0.4);
+  margin-bottom: 4px;
+  letter-spacing: 0.2em;
+}
+
+/* ============================================================
+  NOTIFICATION TOAST
+============================================================ */
+#notification {
+  position: fixed;
+  top: 24px; left: 50%;
+  transform: translateX(-50%) translateY(-80px);
+  background: rgba(10,5,25,0.75);
+  border: 1px solid var(--glass-border);
+  border-radius: 100px;
+  padding: 12px 28px;
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  color: var(--cream);
+  font-family: 'Mukta', sans-serif;
+  font-size: 14px;
+  letter-spacing: 0.05em;
+  z-index: 200;
+  transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.5s ease;
+  white-space: nowrap;
+  opacity: 0;
+}
+
+#notification.show {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+}
+
+/* ============================================================
+  FLASH OVERLAY
+============================================================ */
+#flash {
+  position: fixed; inset: 0; z-index: 100;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+#flash.show { opacity: 1; }
+
+/* ============================================================
+  KEYBOARD SHORTCUT HINT
+============================================================ */
+#kbd-hint {
+  position: fixed; bottom: 22px; left: 50%;
+  transform: translateX(-50%);
+  font-family: 'Mukta', sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: rgba(255,255,255,0.2);
+  z-index: 20;
+  pointer-events: none;
+}
+
+/* ============================================================
+  ANIMATIONS
+============================================================ */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ============================================================
+    RESPONSIVE
+============================================================ */
+@media (max-height: 720px) {
+  #title-dev { font-size: 52px; }
+  #timer-wrapper { width: 230px; height: 230px; }
+  #time-display { font-size: 50px; }
+  #timer-disc { width: 165px; height: 165px; }
+  #mode-tabs { margin-bottom: 14px; }
+  #controls { margin-top: 14px; }
+  #sessions { margin-top: 12px; }
+  #task-section { margin-top: 12px; }
+  #quote-section { margin-top: 12px; }
+  #quote-dev { font-size: 14px; }
+}
+
+@media (max-width: 420px) {
+  .mode-tab { padding: 7px 12px; font-size: 11.5px; }
+  #task-input { width: 260px; }
+}
