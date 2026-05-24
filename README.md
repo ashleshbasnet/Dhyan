@@ -33,7 +33,7 @@ There are no audio files. The **singing bowl sound** on session completion is sy
 - Each partial has its own gain envelope and a slight exponential frequency drop to simulate resonance decay
 - A short sawtooth transient adds the physical "strike" impact
 - Audio context is initialised only on first user interaction (browser autoplay policy compliance)
-NOTE: Audio synthesis is something I've been trying to dive into for a long time so I reccomend anyone to watch the Sebastian Lague Audio Series to delve deep into audio synthesis. Furthermore, audio synthesis is much simpler in python (in my opinion) and extrodinarily simple when you pair it with a game engine such as unity.
+NOTE: Audio synthesis is something I've been trying to dive into for a long time so I reccomend anyone to watch the Sebastian Lague Audio Series to delve deep into audio synthesis. Furthermore, audio synthesis is much simpler in python (in my opinion) and extraordinarily simple when you pair it with a game engine such as unity.
 
 ### Visual Feedback
 - **SVG ring timer:** A circular progress arc (radius 126, circumference ~791.7px) fills via `strokeDashoffset` as time elapses. The ring colour changes between gold (focus) and teal (breaks)
@@ -92,4 +92,5 @@ For running this project, you only need to open the index.html file. I was sugge
 
 ---
 
+*This is a Personal Project, built for an event yet built to solve a problem I had faced.*
 *Built for the WebHack Hackathon by Ashlesh Basnet.*
