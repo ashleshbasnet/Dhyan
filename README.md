@@ -1,5 +1,5 @@
 # ध्यान · Dhyan
-### A Calm Focus Timer for Study
+### A Calm Focus Timer for Any Activity Requiring Concentration, Incorporating Traditional Nepali Themes
 
 ### Check it now at https://ashleshbasnet.github.io/Dhyan/
 
@@ -37,7 +37,7 @@ I would not suggest people try to change the SVG if they aren't skilled with it,
 
 ### Synthesised Audio
 There are no audio files. The **singing bowl sound** on session completion is synthesised entirely via the Web Audio API:
-- Five sine-wave oscillators model the fundamental (396 Hz) and four harmonics
+- Five sine-wave oscillators model the fundamental (396 Hz) and four harmonics, this is the singing bowl.
 - Each partial has its own gain envelope and a slight exponential frequency drop to simulate resonance decay
 - A short sawtooth transient adds the physical "strike" impact
 - Audio context is initialised only on first user interaction (browser autoplay policy compliance)
