@@ -3,7 +3,9 @@
 
 > *"मन शान्त भए संसार शान्त।" — When the mind is calm, the world is calm.*
 
-Dhyan is a Pomodoro-style study timer with a Nepali cultural aesthetic — built with vanilla HTML, CSS, and JavaScript. The interface blends Devanagari typography, Dhaka textile motifs, and generative SVG backgrounds that shift with the time of day. This was created for the RBS WebHack Hackathon. 
+Dhyan is a Pomodoro-style study timer with a Nepali cultural aesthetic, built with vanilla HTML, CSS, and JavaScript. The interface blends Devanagari typography, Dhaka textile motifs, and generative SVG backgrounds that shift with the time of day. This was created for the RBS WebHack Hackathon. 
+
+Do note that the theme was a twist given at the start of the hackathon by the organizer.
 
 ---
 
@@ -27,6 +29,10 @@ The background is not a static image — it is **procedurally generated SVG** co
 
 All prayer flags are also generated programmatically: the `flags()` utility interpolates positions along a line and stamps coloured SVG polygons at each point. Stars in the night scene are placed using a deterministic golden-ratio scatter to avoid clustering. Scene transitions use a 3-second CSS opacity crossfade.
 
+The CrossFades and the time changes have not been tested by me personally, as they change with the local time and changing time locally on my machine will induce a bios time change as I had experienced before.
+
+I would not suggest people try to change the SVG if they aren't skilled with it, I found it a very hard time trying to debug problems there, and it was a template literal too. 0/10 would not reccomend under a time constraint. 
+
 ### Synthesised Audio
 There are no audio files. The **singing bowl sound** on session completion is synthesised entirely via the Web Audio API:
 - Five sine-wave oscillators model the fundamental (396 Hz) and four harmonics
@@ -34,6 +40,7 @@ There are no audio files. The **singing bowl sound** on session completion is sy
 - A short sawtooth transient adds the physical "strike" impact
 - Audio context is initialised only on first user interaction (browser autoplay policy compliance)
 NOTE: Audio synthesis is something I've been trying to dive into for a long time so I reccomend anyone to watch the Sebastian Lague Audio Series to delve deep into audio synthesis. Furthermore, audio synthesis is much simpler in python (in my opinion) and extraordinarily simple when you pair it with a game engine such as unity.
+
 
 ### Visual Feedback
 - **SVG ring timer:** A circular progress arc (radius 126, circumference ~791.7px) fills via `strokeDashoffset` as time elapses. The ring colour changes between gold (focus) and teal (breaks)
@@ -43,6 +50,7 @@ NOTE: Audio synthesis is something I've been trying to dive into for a long time
 
 ### Quotes
 A curated set of Nepali proverbs and reflections is included, displayed in both Devanagari script and English translation. A random quote is selected on load and on each mode change. Most of the quotes were pulled from google, and translated by good old Google Translate.
+For anyone wanting to add in more quotes or change the quotes, the quotes are in the javascript file. 
 
 ### Keyboard Shortcuts
 | Key | Action |
