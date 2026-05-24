@@ -191,47 +191,56 @@ function initAudio() {
 }
 
 function playSingingBowl() {
-  if (!audioCtx) return; 
-  
-  try {
-    const now = audioCtx.currentTime;
+  if (audioCtx.state === 'suspended') audioCtx.resume();
+  const now = audioCtx.currentTime;
 
-    [
-      { f: 396,  g: 0.50, d: 7.5 },
-      { f: 792,  g: 0.22, d: 5.5 },
-      { f: 1188, g: 0.10, d: 4.0 },
-      { f: 1584, g: 0.05, d: 2.5 },
-      { f: 1980, g: 0.03, d: 1.8 },
-    ].forEach(({ f, g, d }) => {
-      const osc  = audioCtx.createOscillator();
-      const gain = audioCtx.createGain();
-      osc.type = 'sine';
-      osc.frequency.setValueAtTime(f, now);
-      osc.frequency.exponentialRampToValueAtTime(f * 0.9975, now + d);
-      gain.gain.setValueAtTime(0.0001, now);
-      gain.gain.exponentialRampToValueAtTime(g, now + 0.035);
-      gain.gain.exponentialRampToValueAtTime(0.0001, now + d);
-      osc.connect(gain);
-      gain.connect(audioCtx.destination);
-      osc.start(now);
-      osc.stop(now + d + 0.1);
-    });
+  // 1. THE "BRONZE FILTER" (The Master Polish)
+  // This softens the harsh high-end digital edges.
+  const masterFilter = audioCtx.createBiquadFilter();
+  masterFilter.type = 'lowpass';
+  masterFilter.frequency.value = 2500; // Cuts the "synthy" digital fizz
+  masterFilter.connect(audioCtx.destination);
 
-    const hit  = audioCtx.createOscillator();
-    const hGain = audioCtx.createGain();
-    hit.type = 'sawtooth';
-    hit.frequency.setValueAtTime(280, now);
-    hit.frequency.exponentialRampToValueAtTime(60, now + 0.08);
-    hGain.gain.setValueAtTime(0.07, now);
-    hGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.1);
-    hit.connect(hGain);
-    hGain.connect(audioCtx.destination);
-    hit.start(now);
-    hit.stop(now + 0.12);
+  // 2. The "Striker"
+  const strike = audioCtx.createOscillator();
+  const sGain = audioCtx.createGain();
+  strike.type = 'sawtooth';
+  strike.frequency.setValueAtTime(160, now); 
+  sGain.gain.setValueAtTime(0.3, now);
+  sGain.gain.exponentialRampToValueAtTime(0.001, now + 0.05);
+  strike.connect(sGain);
+  sGain.connect(masterFilter); // Send through filter
+  strike.start(now);
+  strike.stop(now + 0.05);
 
-  } catch (e) { console.warn("Audio playback failed", e); }
+  // 3. THE PARTIALS (Mixed Waveforms)
+  const partials = [
+      { f: 432.0,  d: 6.0, g: 0.5, type: 'sine' },      // Fundamental: Warm & Pure
+      { f: 434.4,  d: 5.5, g: 0.3, type: 'triangle' },  // Beat: Woodier
+      { f: 842.0,  d: 4.0, g: 0.2, type: 'triangle' },  // Harmonic
+      { f: 1252.0, d: 3.0, g: 0.1, type: 'sawtooth' },  // Metallic edge (Sawtooth adds that "grit")
+      { f: 1672.0, d: 2.0, g: 0.05, type: 'sawtooth' }  // High shimmer
+  ];
+
+  partials.forEach((p) => {
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+    
+    osc.type = p.type; // Dynamically setting waveforms kills the "synth" feel
+    osc.frequency.setValueAtTime(p.f, now);
+    
+    gain.gain.setValueAtTime(0, now);
+    gain.gain.linearRampToValueAtTime(p.g, now + 0.05);
+    gain.gain.setValueAtTime(p.g, now + 0.1); 
+    gain.gain.exponentialRampToValueAtTime(0.001, now + p.d);
+    
+    osc.connect(gain);
+    gain.connect(masterFilter); // Everything goes through the Bronze Filter!
+    
+    osc.start(now);
+    osc.stop(now + p.d);
+  });
 }
-
 
 // visual stuff
 function triggerFlash() {
