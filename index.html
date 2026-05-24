@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ध्यान · Dhyan</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Hindi:ital@0;1&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Mukta:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./css/style.css">
+  <script src="./js/main.js" defer></script>
+
+  <!--Aarav Pandey my Goat-->
+</head>
+<body>
+
+  <!-- Flash overlay on session complete -->
+  <div id="flash"></div>
+
+  <!-- Toast notification -->
+  <div id="notification">ध्यान सम्पन्न! · Session complete</div>
+
+  <!-- Dynamic background scenes (populated by JS) -->
+  <div id="bg-container"></div>
+
+  <!-- Dhaka pattern grain -->
+  <div id="dhaka-grain"></div>
+
+  <!-- Dhaka weave border bands -->
+  <div id="band-top"></div>
+  <div id="band-bottom"></div>
+  <div id="band-left"></div>
+  <div id="band-right"></div>
+
+  <!-- Main App -->
+  <div id="app">
+
+    <!-- Header -->
+    <div id="header">
+      <div id="title-dev">ध्यान</div>
+      <div id="title-roman">D &nbsp; H &nbsp; Y &nbsp; A &nbsp; N</div>
+      <div id="title-sub">A Calm Focus Timer for Study</div>
+    </div>
+
+    <!-- Mode Tabs -->
+    <div id="mode-tabs">
+      <button class="mode-tab active" data-mode="focus">ध्यान · Focus</button>
+      <button class="mode-tab" data-mode="short">विश्राम · Break</button>
+      <button class="mode-tab" data-mode="long">लामो विश्राम · Long Break </button>
+    </div>
+
+
+    <div id="timer-wrapper">
+      <svg id="timer-svg" viewBox="0 0 280 280" overflow="visible">
+        <!-- Decorative outer dashed ring -->
+        <circle class="ring-decor" cx="140" cy="140" r="136"/>
+        <!-- Track -->
+        <circle class="ring-bg" cx="140" cy="140" r="126"/>
+        <!-- Progress arc -->
+        <circle class="ring-progress" id="ring" cx="140" cy="140" r="126"/>
+        <!-- tick function -->
+        <g id="ticks" stroke="rgba(201,154,20,0.25)" stroke-width="1.5" stroke-linecap="round">
+        </g>
+        <!-- lotus pedal hint -->
+        <circle cx="140" cy="140" r="4" fill="rgba(201,154,20,0.3)" transform="rotate(90 140 140)"/>
+      </svg>
+      <div id="timer-disc"></div>
+      <div id="timer-inner">
+        <div id="time-display">25:00</div>
+        <div id="mode-label">FOCUS</div>
+        <div id="mode-label-dev">ध्यान</div>
+      </div>
+    </div>
+
+    <!-- Controls -->
+    <div id="controls">
+      <button class="btn-secondary" id="btn-reset" title="Reset (R)">
+        <svg viewBox="0 0 24 24">
+          <polyline points="1 4 1 10 7 10"/>
+          <path d="M3.51 15a9 9 0 1 0 .49-4.68"/>
+        </svg>
+      </button>
+
+      <button id="btn-start" class="pulsing" title="Start / Pause (Space)">
+        <svg id="play-icon" viewBox="0 0 24 24"><polygon points="6,3 20,12 6,21" fill="currentColor"/></svg>
+        <svg id="pause-icon" viewBox="0 0 24 24" style="display:none">
+          <rect x="6" y="4" width="4" height="16" rx="1.5" fill="currentColor"/>
+          <rect x="14" y="4" width="4" height="16" rx="1.5" fill="currentColor"/>
+        </svg>
+      </button>
+
+      <button class="btn-secondary" id="btn-skip" title="Skip Session (S)">
+        <svg viewBox="0 0 24 24">
+          <polygon points="5,4 15,12 5,20"/>
+          <line x1="19" y1="5" x2="19" y2="19" stroke-width="2.5"/>
+        </svg>
+      </button>
+    </div>
+
+    <!--session dots-->
+    <div id="sessions">
+      <div class="session-dot" id="dot-0"></div>
+      <div class="session-dot" id="dot-1"></div>
+      <div class="session-dot" id="dot-2"></div>
+      <div class="session-dot" id="dot-3"></div>
+      <span id="session-count-label">0 / 4</span>
+    </div>
+
+    <!--task input-->
+    <div id="task-section">
+      <input type="text" id="task-input"
+             placeholder="What are you studying today?"
+             maxlength="55" autocomplete="off" spellcheck="false"/>
+    </div>
+
+    <!--quotes-->
+    <div id="quote-section">
+      <div id="quote-ornament">❈</div>
+      <div id="quote-dev"></div>
+      <div id="quote-en"></div>
+    </div>
+
+  </div><!-- /#app -->
+
+  <!--keyboard-->
+  <div id="kbd-hint">SPACE · play &nbsp;|&nbsp; R · reset &nbsp;|&nbsp; S · skip</div>
+</body>
+</html>
