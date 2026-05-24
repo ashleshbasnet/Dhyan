@@ -91,6 +91,9 @@ The visual identity draws from Nepali craft and cultural motifs:
 
 For running this project, you only need to open the index.html file. I was suggested a lot of things such as NPM and stuff but I centered this project around plain html src. 
 
+As for use:
+Click the play button and thats it! Everything happens automatically. Follow the keybind and instruction!
+
 ---
 
 ## Notes
@@ -103,7 +106,7 @@ For running this project, you only need to open the index.html file. I was sugge
 
 ---
 
-*This is a Personal Project, built for an event yet built to solve a problem I had faced.*
+*This is a Personal Project, built for an event yet solved a problem I had faced.*
 
 
 *Built for the WebHack Hackathon by Ashlesh Basnet.*
