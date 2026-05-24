@@ -13,7 +13,7 @@ Do note that the theme was a twist given at the start of the hackathon by the or
 
 ### Timer & Sessions
 - **Three modes:** Focus (25 min), Short Break (5 min), Long Break (15 min)
-- **Pomodoro cycle:** After 4 completed focus sessions, a long break is triggered automatically. After 2 completed sessions, a short break it triggered too.
+- **Pomodoro cycle:** After 4 completed focus sessions, a long break is triggered automatically.
 - **Session dots:** Four visual indicators track progress through a Pomodoro cycle
 - **Task input:** A text field to note what you're studying, keeping you anchored
 
